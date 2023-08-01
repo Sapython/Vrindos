@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Authorization</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Authorization</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-item>
+    <ion-label>Loading</ion-label>
+    <ion-spinner name="crescent" *ngIf="this.dataProvider.loading" slot="end"></ion-spinner>
+  </ion-item>
+  <ion-list *ngIf="!this.dataProvider.loading">
+    <ng-container *ngIf="!this.dataProvider.loggedIn">
+      <ion-item>
+        <ion-label><h2>You are not logged in</h2></ion-label>
+      </ion-item>
+      <ion-item color="danger" button detail (click)="dataProvider.signInWithGoogle()">
+        <ion-label>Login Now</ion-label>
+      </ion-item>
+    </ng-container>
+    <ng-container *ngIf="this.dataProvider.loggedIn">
+      <ion-item>
+        <ion-label><h2>You are already logged in</h2></ion-label>
+      </ion-item>
+      <ion-item color="success" button detail routerLink="../">
+        <ion-label>Continue Now</ion-label>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>
