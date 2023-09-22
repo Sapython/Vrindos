@@ -1,14 +1,12 @@
 export const environment = {
   firebase: {
-    projectId: 'fbms-shreeva-demo',
-    appId: '1:403464137223:web:4633bbabf32dbf94a858a2',
-    databaseURL: 'https://fbms-shreeva-demo-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'fbms-shreeva-demo.appspot.com',
-    locationId: 'us-central',
-    apiKey: 'AIzaSyATbn4lcWC9FwXTIHpA9iVyeADvdExh-bo',
-    authDomain: 'fbms-shreeva-demo.firebaseapp.com',
-    messagingSenderId: '403464137223',
-    measurementId: 'G-Y535Z7BMRW',
+    projectId: 'vrajera-d1e58',
+    appId: '1:111238441767:web:94b24a0c6991bb24e79702',
+    storageBucket: 'vrajera-d1e58.appspot.com',
+    apiKey: 'AIzaSyA00DaJ9Cx8zO_LhOsmdIPEP7t_4v5atww',
+    authDomain: 'vrajera-d1e58.firebaseapp.com',
+    messagingSenderId: '111238441767',
+    measurementId: 'G-VWWCGVHTRH',
   },
   production: true
 };
