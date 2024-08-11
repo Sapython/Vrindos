@@ -1,24 +1,14 @@
 {
-  "hosting": [
-    {
-      "site": "vrindos",
-      "public": "www",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
-    },
-    {
-      "target": "app",
-      "source": ".",
-      "frameworksBackend": {}
+  "hosting": {
+    "site": "vrindos-vrajera",
+    "source": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "frameworksBackend": {
+      "region": "asia-south1"
     }
-  ]
+  }
 }
