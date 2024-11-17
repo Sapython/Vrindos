@@ -1,0 +1,139 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{currentBusiness?.hotelName}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="success" (click)="renewBusiness = true">
+        <ion-icon name="refresh-sharp"></ion-icon>
+        Renew
+      </ion-button>
+      <ion-button color="danger" (click)="disableBusiness = true">
+        <ion-icon name="close-circle-sharp"></ion-icon>
+        Disable
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{currentBusiness?.hotelName}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-item>
+    <ion-label>Expiry</ion-label>
+    <ion-chip color="success" mode="ios" outline="true" *ngIf="this.validityStatus">
+      <ion-label>{{this.validityStatus.toDate() | date}}</ion-label>
+    </ion-chip>
+    <ion-chip color="danger" mode="ios" outline="true" *ngIf="!this.validityStatus">
+      <ion-label>Expired</ion-label>
+    </ion-chip>
+  </ion-item>
+  <ion-item>
+    <ion-label>Phone</ion-label>
+    <ion-label color="primary">{{currentBusiness.phone}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Address</ion-label>
+    <ion-label color="primary">{{currentBusiness.address}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Email</ion-label>
+    <ion-label color="primary">{{currentBusiness.email}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>GST</ion-label>
+    <ion-label color="primary">{{currentBusiness.gst}}</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>FSSAI</ion-label>
+    <ion-label color="primary">{{currentBusiness.fssai}}</ion-label>
+  </ion-item>
+  <ion-item-divider>
+    <ion-label>Users</ion-label>
+  </ion-item-divider>
+  <ion-item *ngFor="let user of currentBusiness.users">
+    <ion-avatar slot="start">
+      <img
+        src="https://api.dicebear.com/6.x/initials/svg?seed={{user.username}}"
+      />
+    </ion-avatar>
+    <ion-label>{{user.username}}</ion-label>
+    <ion-chip>{{user.accessType}}</ion-chip>
+  </ion-item>
+</ion-content>
+<ion-modal
+  [isOpen]="renewBusiness"
+  [initialBreakpoint]="0.6"
+  [breakpoints]="[0.6,1]"
+>
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Renew</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-list>
+        <ion-item>
+          <ion-label>Renew Periods</ion-label>
+          <ion-select value="year" interface="action-sheet" placeholder="Select Period" #renewPeriod>
+            <ion-select-option value="year5">5 Year</ion-select-option>
+            <ion-select-option value="year3">3 Year</ion-select-option>
+            <ion-select-option value="year2">2 Year</ion-select-option>
+            <ion-select-option value="year1">1 Year</ion-select-option>
+            <ion-select-option value="month6">6 Month</ion-select-option>
+            <ion-select-option value="month3">3 Month</ion-select-option>
+            <ion-select-option value="month1">1 Month</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item button detail (click)="renewAccessToken(renewPeriod.value)">
+          <ion-label color="success">Submit</ion-label>
+        </ion-item>
+        <ion-item (click)="renewBusiness = false" button detail>
+          <ion-label color="danger">Cancel</ion-label>
+        </ion-item>
+        <!-- <ion-row>
+          <ion-button color="primary" expand="block">Renew</ion-button>
+          <ion-button fill="outline" color="danger" (click)="renewBusiness = false" expand="block">Cancel</ion-button>
+        </ion-row> -->
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+<ion-modal
+  [isOpen]="disableBusiness"
+  (onDidDismiss)="disableBusiness = false;ionViewWillEnter()"
+  [initialBreakpoint]="0.6"
+  [breakpoints]="[0.6,1]"
+>
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Renew</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <h2>Are you sure ?</h2>
+          </ion-label>
+        </ion-item>
+        <ion-item button detail (click)="disableAccess()">
+          <ion-label color="danger">Yes Disable</ion-label>
+        </ion-item>
+        <ion-item (click)="renewBusiness = false" button detail>
+          <ion-label color="warning">Cancel</ion-label>
+        </ion-item>
+        <!-- <ion-row>
+          <ion-button color="primary" expand="block">Renew</ion-button>
+          <ion-button fill="outline" color="danger" (click)="renewBusiness = false" expand="block">Cancel</ion-button>
+        </ion-row> -->
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-modal>

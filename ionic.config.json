@@ -1,0 +1,7 @@
+{
+  "name": "Vrindos",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
